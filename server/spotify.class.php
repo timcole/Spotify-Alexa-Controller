@@ -42,14 +42,14 @@ class Spotify
 
 	public function spotify($command)
 	{
-		@file_get_contents("http://".$homeip."/?".$command, 0, stream_context_create(array('http' => array('timeout' => 0.1))));
+		@file_get_contents("http://".$this->homeip."/?".$command, 0, stream_context_create(array('http' => array('timeout' => 0.1))));
 	}
 
 	public function spotifySearch($song)
 	{
 		$search = @json_decode(file_get_contents("https://api.spotify.com/v1/search?q=".urlencode($song)."&type=track&limit=1"), true);
 		if(isset($search['tracks']['items'][0]['uri'])) {
-			@file_get_contents("http://".$homeip."/?play=".$search['tracks']['items'][0]['uri'], 0, stream_context_create(array('http' => array('timeout' => 0.1))));
+			@file_get_contents("http://".$this->homeip."/?play=".$search['tracks']['items'][0]['uri'], 0, stream_context_create(array('http' => array('timeout' => 0.1))));
 			$this->sendResponse("Playing: ".$search['tracks']['items'][0]['name']." by ".$search['tracks']['items'][0]['artists'][0]['name']);
 		} else {
 			$this->sendResponse("I couldn't find the song you requested.");
