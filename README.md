@@ -1,5 +1,6 @@
 Spotify Alexa (Amazon Echo) Controller
 ===================
+*Deprecated: Spotify is now built into Alexa!*
 
 ##Client
 
